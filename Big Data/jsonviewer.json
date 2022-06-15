@@ -1,0 +1,126 @@
+{
+  "Patient1": {
+    "Name": "Piyush Joshi",
+    "Age": 22,
+    "Address": {
+      "City": "Indore",
+      "State": "Madhya Pradesh",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      7047436645,
+      8982161294
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Kuku Joshi",
+      "D_age": 54,
+      "D_Specialisation": "Cardiologist"
+    },
+    "Diagonosis_For": "Cardiac Arrest",
+    "Stay_Days": 5,
+    "Bill": 5000
+  },
+  "Patient2": {
+    "Name": "Shyamu",
+    "Age": 42,
+    "Address": {
+      "City": "Ahemdabad",
+      "State": "Gujarat",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      9847436645,
+      8982161294
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Yogesh Shah",
+      "D_age": 34,
+      "D_Specialisation": "Psychiatrist"
+    },
+    "Diagonosis_For": "Emotioanal Damage",
+    "Stay_Days": 6,
+    "Bill": 9000
+  },
+  "Patient3": {
+    "Name": "Ryzen George",
+    "Age": 26,
+    "Address": {
+      "City": "Bombay",
+      "State": "Maharashtra",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      9847436645,
+      8982161294
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Destiny Joshi",
+      "D_age": 84,
+      "D_Specialisation": "Orthodontist"
+    },
+    "Diagonosis_For": "Braces",
+    "Stay_Days": 15,
+    "Bill": 50000
+  },
+  "Patient4": {
+    "Name": "Anant Kushwah",
+    "Age": 28,
+    "Address": {
+      "City": "Ricardo",
+      "State": "Madhya Pradesh",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      9982161294
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Opraksh Joshi",
+      "D_age": 44,
+      "D_Specialisation": "Dentist"
+    },
+    "Diagonosis_For": "Root Canal",
+    "Stay_Days": 6,
+    "Bill": 50090
+  },
+  "Patient5": {
+    "Name": "Ramu Kaka",
+    "Age": 28,
+    "Address": {
+      "City": "Katni",
+      "State": "Madhya Pradesh",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      9847436645,
+      8982161294
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Renuka Jain",
+      "D_age": 65,
+      "D_Specialisation": "Neurologist"
+    },
+    "Diagonosis_For": "Brain Cancer",
+    "Stay_Days": 50,
+    "Bill": 50000
+  },
+  "Patient6": {
+    "Name": "Radhe Shyam",
+    "Age": 25,
+    "Address": {
+      "City": "Bhopal",
+      "State": "Madhya Pradesh",
+      "Country": "India"
+    },
+    "Mobile Number": [
+      8770972203
+    ],
+    "Assigned_Doctor": {
+      "D_name": "Mister John",
+      "D_age": 27,
+      "D_Specialisation": "Radiologist"
+    },
+    "Diagonosis_For": "X Ray",
+    "Stay_Days": 1,
+    "Bill": 800
+  }
+}

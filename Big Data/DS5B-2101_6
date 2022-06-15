@@ -1,0 +1,640 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "VQuestion_DS5B-2137.ipynb",
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "My Roll No. Is : DS5B-2137"
+      ],
+      "metadata": {
+        "id": "kbgOt_QUP-bk"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Install PySpark"
+      ],
+      "metadata": {
+        "id": "8BCF5TldN3Mh"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "lNniE_wnN0jW",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "1cb623ee-9cf1-4a6a-e6b1-10cd772d7d88"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/\n",
+            "Collecting pyspark\n",
+            "  Downloading pyspark-3.2.1.tar.gz (281.4 MB)\n",
+            "\u001b[K     |████████████████████████████████| 281.4 MB 35 kB/s \n",
+            "\u001b[?25hCollecting py4j==0.10.9.3\n",
+            "  Downloading py4j-0.10.9.3-py2.py3-none-any.whl (198 kB)\n",
+            "\u001b[K     |████████████████████████████████| 198 kB 52.9 MB/s \n",
+            "\u001b[?25hBuilding wheels for collected packages: pyspark\n",
+            "  Building wheel for pyspark (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for pyspark: filename=pyspark-3.2.1-py2.py3-none-any.whl size=281853642 sha256=232df15823e37582f73d087dbafa941492a3f5f0c3aded6975fb0ddf02d42f9a\n",
+            "  Stored in directory: /root/.cache/pip/wheels/9f/f5/07/7cd8017084dce4e93e84e92efd1e1d5334db05f2e83bcef74f\n",
+            "Successfully built pyspark\n",
+            "Installing collected packages: py4j, pyspark\n",
+            "Successfully installed py4j-0.10.9.3 pyspark-3.2.1\n"
+          ]
+        }
+      ],
+      "source": [
+        "pip install pyspark"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Create Spark Context\n",
+        "Main entry point for Spark functionality. A SparkContext represents the connection to a Spark cluster, and can be used to create RDD and broadcast variables on that cluster."
+      ],
+      "metadata": {
+        "id": "m9A8tP2JN-gk"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "My Roll No. Is : DS5B-2137"
+      ],
+      "metadata": {
+        "id": "XpHEzKr6QTN1"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from pyspark import SparkConf, SparkContext"
+      ],
+      "metadata": {
+        "id": "vsLUDw28RNcl"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "if __name__ == \"__main__\":\n",
+        "  conf = SparkConf().setAppName(\"exam\").setMaster(\"local[2]\")\n",
+        "  # AppName : A name for your job, to display on the cluster web UI and Master: Cluster URL to connect to local or spark host etc and in it we can define how many cluster(partitions) we need.\n",
+        "  sc = SparkContext(conf = conf)"
+      ],
+      "metadata": {
+        "id": "IKXfjqUHSieJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Create a RDD by reading the csv file\n",
+        "A Resilient Distributed Dataset (RDD), the basic abstraction in Spark. Represents an immutable, partitioned collection of elements that can be operated on in parallel."
+      ],
+      "metadata": {
+        "id": "f8VIaQW-TFRC"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "My Roll No. Is : DS5B-2137"
+      ],
+      "metadata": {
+        "id": "xRgHYjdTQUO8"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data = sc.textFile(\"amazon.csv\")"
+      ],
+      "metadata": {
+        "id": "YQTcbolDTJSU"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Print the top five raws of dataset"
+      ],
+      "metadata": {
+        "id": "xcqrf47CTudD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data.take(5)"
+      ],
+      "metadata": {
+        "id": "I9oJiATaTsHc",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "120c59b2-d4b3-4a75-ba86-bfb4d18cd789"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['product name,asin,product url,brand name,image url,mrp,sale price,discount percentage,product description,date first available,number of reviews,seller name',\n",
+              " 'BHAGIRATH Standard comfort Disposable Pollution/Surgical Elastic Mask Surgical Face Mask with Earloop Great for Air Pollution Virus. 1,B085GL266P,https://www.amazon.in/BHAGIRATH-Standard-Disposable-Pollution-Surgical/dp/B085GL266P/,Bhagirath fab,https://images-na.ssl-images-amazon.com/images/I/61XinzsWunL._SL1100_.jpg, 16999.00,199.00,99%,IND mask covers the user’s nose and mouth and provides a physical barrier to fluids and particulate materials. The surgical masks referenced in this guidance document include masks that are labeled as a surgical  laser  isolation  dental or medical procedure masks with or without a face shield.,2020-03-01 00:00:00,0,Bhagirath fab',\n",
+              " 'SHOPPERMART urgical Face Mask Disposable - Pack of 5,B07YPSZK39,https://www.amazon.in/SHOPPERMART-urgical-Face-Mask-Disposable/dp/B07YPSZK39/,SHOPPERMART,https://images-na.ssl-images-amazon.com/images/I/61BgE1t%2BUJL._SL1000_.jpg,,,,Easy breathable  effective multiplayer bacterial filter  soft  lightweight  comfortable and easy to wear  used in medical  dental  laboratory  food sectors  school  household  industry and multi-purpose  bacteria filtration efficiency 99%  particle filtration efficiency (0.1 micron) 99%  virus filtration efficiency (0.1 micron) 99%  fluid repellent 120 mmhg  breathable < 49 0 pa fluid resistant hygienic & skin friendly ,2019-10-03 00:00:00,2,',\n",
+              " 'ShopyBucket Standard 3 PCS comfort Disposable Pollution Elastic Mask Disposable 3 Ply Face Mask with Earloop Great for Air Pollution Virus Protection & Personal Health Face Mask,B0855V7MQ8,https://www.amazon.in/ShopyBucket-Standard-Disposable-Pollution-Protection/dp/B0855V7MQ8/,Shopy,https://images-na.ssl-images-amazon.com/images/I/61SPmUgDP9L._SL1100_.jpg, 798.00,510.00,36%,,2020-02-26 00:00:00,0,BasicDeal',\n",
+              " \"Ivaan Disposable Earloop Medical Face Masks Two Layer Non-Woven Pack 0f 100 pcs,B082HDNJCP,https://www.amazon.in/Ivaan-Disposable-Earloop-Medical-Non-Woven/dp/B082HDNJCP/,IVAAN,https://images-na.ssl-images-amazon.com/images/I/71MXY9ud8OL._SL1500_.jpg,,,,Facemasks help limit the spread of germs. When someone talks  coughs  or sneezes they may release tiny drops into the air that can infect others. If someone is ill face masks can reduce the number of germs that the wearer releases and can protect other people from becoming sick. A face mask also protects the wearer's nose and mouth from splashes or sprays of body fluids. It is ideal for every house in day to day activities as well as doctors  surgeons  dentist  dental assistance  nurses  landscapers  contractors  plumbers  exterminators  nail technicians and many more.,2019-12-08 00:00:00,6,\"]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Count total number of raw in dataset"
+      ],
+      "metadata": {
+        "id": "XxBVK2hzWeni"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "My Roll No. Is : DS5B-2137"
+      ],
+      "metadata": {
+        "id": "BJNUH_B1QVS5"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data.count()"
+      ],
+      "metadata": {
+        "id": "bRvhN5sEWaow",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "dc08cd1c-aa4d-49cf-d9c1-55074898ed25"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "532"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Check the number of partitions"
+      ],
+      "metadata": {
+        "id": "hXpQx1VuUhpB"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "data.getNumPartitions()"
+      ],
+      "metadata": {
+        "id": "4BF3pnzqUmJb",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f92efb1b-88c6-40ed-acb0-bc2640563746"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "My Roll No. Is : DS5B-2137"
+      ],
+      "metadata": {
+        "id": "hs4uRP2lQW44"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Remove Heading\n",
+        "we remove heading so that we don't get any error while applying any rdd operation regarding heading raw"
+      ],
+      "metadata": {
+        "id": "GrpYuikcW1aa"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "header = data.first()\n",
+        "header"
+      ],
+      "metadata": {
+        "id": "oLudHC2zXHN8",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "outputId": "deb6bec2-d520-4a21-a332-4f669570d36a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'product name,asin,product url,brand name,image url,mrp,sale price,discount percentage,product description,date first available,number of reviews,seller name'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "newdata = data.filter(lambda x: x!=header)"
+      ],
+      "metadata": {
+        "id": "Wo3FmhkNXP_U"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "newdata.take(4)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "G3R63R4mKI9h",
+        "outputId": "f0803ca4-5d95-4321-ed69-15d88749c10e"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['BHAGIRATH Standard comfort Disposable Pollution/Surgical Elastic Mask Surgical Face Mask with Earloop Great for Air Pollution Virus. 1,B085GL266P,https://www.amazon.in/BHAGIRATH-Standard-Disposable-Pollution-Surgical/dp/B085GL266P/,Bhagirath fab,https://images-na.ssl-images-amazon.com/images/I/61XinzsWunL._SL1100_.jpg, 16999.00,199.00,99%,IND mask covers the user’s nose and mouth and provides a physical barrier to fluids and particulate materials. The surgical masks referenced in this guidance document include masks that are labeled as a surgical  laser  isolation  dental or medical procedure masks with or without a face shield.,2020-03-01 00:00:00,0,Bhagirath fab',\n",
+              " 'SHOPPERMART urgical Face Mask Disposable - Pack of 5,B07YPSZK39,https://www.amazon.in/SHOPPERMART-urgical-Face-Mask-Disposable/dp/B07YPSZK39/,SHOPPERMART,https://images-na.ssl-images-amazon.com/images/I/61BgE1t%2BUJL._SL1000_.jpg,,,,Easy breathable  effective multiplayer bacterial filter  soft  lightweight  comfortable and easy to wear  used in medical  dental  laboratory  food sectors  school  household  industry and multi-purpose  bacteria filtration efficiency 99%  particle filtration efficiency (0.1 micron) 99%  virus filtration efficiency (0.1 micron) 99%  fluid repellent 120 mmhg  breathable < 49 0 pa fluid resistant hygienic & skin friendly ,2019-10-03 00:00:00,2,',\n",
+              " 'ShopyBucket Standard 3 PCS comfort Disposable Pollution Elastic Mask Disposable 3 Ply Face Mask with Earloop Great for Air Pollution Virus Protection & Personal Health Face Mask,B0855V7MQ8,https://www.amazon.in/ShopyBucket-Standard-Disposable-Pollution-Protection/dp/B0855V7MQ8/,Shopy,https://images-na.ssl-images-amazon.com/images/I/61SPmUgDP9L._SL1100_.jpg, 798.00,510.00,36%,,2020-02-26 00:00:00,0,BasicDeal',\n",
+              " \"Ivaan Disposable Earloop Medical Face Masks Two Layer Non-Woven Pack 0f 100 pcs,B082HDNJCP,https://www.amazon.in/Ivaan-Disposable-Earloop-Medical-Non-Woven/dp/B082HDNJCP/,IVAAN,https://images-na.ssl-images-amazon.com/images/I/71MXY9ud8OL._SL1500_.jpg,,,,Facemasks help limit the spread of germs. When someone talks  coughs  or sneezes they may release tiny drops into the air that can infect others. If someone is ill face masks can reduce the number of germs that the wearer releases and can protect other people from becoming sick. A face mask also protects the wearer's nose and mouth from splashes or sprays of body fluids. It is ideal for every house in day to day activities as well as doctors  surgeons  dentist  dental assistance  nurses  landscapers  contractors  plumbers  exterminators  nail technicians and many more.,2019-12-08 00:00:00,6,\"]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Function 1"
+      ],
+      "metadata": {
+        "id": "416y_AoiNBFQ"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Filter product name , product brand, product url, product image url"
+      ],
+      "metadata": {
+        "id": "uPmsrD-JN5sL"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def fun1(x):\n",
+        "  a = x.split(\",\")\n",
+        "  return a[0], a[3], a[2], a[4]"
+      ],
+      "metadata": {
+        "id": "JMggvh06Nh72"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "newdata.map(fun1).take(4)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "luA86BAUKK-K",
+        "outputId": "07ea277b-1c1f-46a2-e8a2-9a39914f694b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[('BHAGIRATH Standard comfort Disposable Pollution/Surgical Elastic Mask Surgical Face Mask with Earloop Great for Air Pollution Virus. 1',\n",
+              "  'Bhagirath fab',\n",
+              "  'https://www.amazon.in/BHAGIRATH-Standard-Disposable-Pollution-Surgical/dp/B085GL266P/',\n",
+              "  'https://images-na.ssl-images-amazon.com/images/I/61XinzsWunL._SL1100_.jpg'),\n",
+              " ('SHOPPERMART urgical Face Mask Disposable - Pack of 5',\n",
+              "  'SHOPPERMART',\n",
+              "  'https://www.amazon.in/SHOPPERMART-urgical-Face-Mask-Disposable/dp/B07YPSZK39/',\n",
+              "  'https://images-na.ssl-images-amazon.com/images/I/61BgE1t%2BUJL._SL1000_.jpg'),\n",
+              " ('ShopyBucket Standard 3 PCS comfort Disposable Pollution Elastic Mask Disposable 3 Ply Face Mask with Earloop Great for Air Pollution Virus Protection & Personal Health Face Mask',\n",
+              "  'Shopy',\n",
+              "  'https://www.amazon.in/ShopyBucket-Standard-Disposable-Pollution-Protection/dp/B0855V7MQ8/',\n",
+              "  'https://images-na.ssl-images-amazon.com/images/I/61SPmUgDP9L._SL1100_.jpg'),\n",
+              " ('Ivaan Disposable Earloop Medical Face Masks Two Layer Non-Woven Pack 0f 100 pcs',\n",
+              "  'IVAAN',\n",
+              "  'https://www.amazon.in/Ivaan-Disposable-Earloop-Medical-Non-Woven/dp/B082HDNJCP/',\n",
+              "  'https://images-na.ssl-images-amazon.com/images/I/71MXY9ud8OL._SL1500_.jpg')]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 24
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Function 2"
+      ],
+      "metadata": {
+        "id": "6VsMvPC5OCbB"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "To find the max sales price"
+      ],
+      "metadata": {
+        "id": "ZtghIJ81P6t2"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def fun2(x):\n",
+        "  a = x.split(\",\")[-6]\n",
+        "  if a == '':\n",
+        "    return 0\n",
+        "  else:\n",
+        "    return float(a)"
+      ],
+      "metadata": {
+        "id": "qabGfdVvNwzN"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "newdata.map(fun2).max()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "F9AlQHVqOkQp",
+        "outputId": "2c613477-7714-4b44-d41d-bb355fb29ca1"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "22050.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 42
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Function 3"
+      ],
+      "metadata": {
+        "id": "PGSPIRv8P3JI"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "To find the minimum MRP"
+      ],
+      "metadata": {
+        "id": "SRTDWlYUQcyB"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def fun2(x):\n",
+        "  a = x.split(\",\")[6]\n",
+        "  if a == '':\n",
+        "    return \"null\"\n",
+        "  else:\n",
+        "    return float(a)"
+      ],
+      "metadata": {
+        "id": "pWLmVrmJOqTD"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "newdata.map(fun2).filter(lambda x: x != \"null\").min()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KQlMqMchQiwW",
+        "outputId": "ff7c0845-4017-4838-dada-ed4aee606272"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "45.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 48
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Function 4"
+      ],
+      "metadata": {
+        "id": "SIiXNXECRP6_"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "rdd1, rdd2 = newdata.randomSplit([2, 3], 17)"
+      ],
+      "metadata": {
+        "id": "he-h2iXuQk8o"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "rdd1.count()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pc0Kjy6DfSOJ",
+        "outputId": "e880b0e7-75f2-4c48-ae68-33354bf696ac"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "212"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 51
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "rdd2.count()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sPvGJHNhfW-v",
+        "outputId": "c8839324-c27c-4d66-ea1c-bf1aa8306f7a"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "319"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 52
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Function5"
+      ],
+      "metadata": {
+        "id": "HwRCNqsrfb9N"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        ""
+      ],
+      "metadata": {
+        "id": "t49WKqdyfYo4"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}

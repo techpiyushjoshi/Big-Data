@@ -1,0 +1,38 @@
+{"Patient1":{"Name":"Meghanshu kumrawat",
+             "Age":25,
+             "city":"Indore",
+             "contact no":[7047436645,8982161294],
+             "patient gaurdian":{"G_name":"Anil jain","G_age":34,"G_realtion":"father"},
+             "dieseas":"heart attack",
+             "condition":"critical",
+            "report":{"blood report":"document path", "urin report":"document path", "BP report":"document path"}
+},
+"Patient2":{"Name":"Ayush kag",
+             "Age":24,
+             "city":"Guna",
+             "contact no":[7047436646,8782161294],
+             "patient gaurdian":{"G_name":"arun jain","G_age":46,"G_realtion":"father"},
+             "dieseas":"eye_dieseas",
+             "condition":"critical",
+    "report":{"blood report":"document path", "urin report":"document path", "BP report":"document path"}
+},
+"Patient3":{"Name":"tarun jain",
+             "Age":30,
+             "city":"ashok nagar",
+             "contact no":[7047436456,8782167294],
+             "patient gaurdian":{"G_name":"neelansh jain","G_age":50,"G_realtion":"father"},
+             "dieseas":"urine diaseas",
+             "condition":"normal",
+    "report":{"blood report":"document path", "urin report":"document path", "BP report":"document path"}
+},
+"Patient4":{"Name":"neelima jain",
+             "Age":56,
+             "city":"ujjain",
+             "contact no":[7047436566,8782177294],
+             "patient gaurdian":{"G_name":"shanti jain","G_age":34,"G_realtion":"son"},
+             "dieseas":"eye_dieseas",
+             "condition":"normal",
+    "report":{"blood report":"document path", "urin report":"document path", "BP report":"document path"}
+}
+    
+}
